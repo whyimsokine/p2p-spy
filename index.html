@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -10,10 +9,8 @@
         :root {
             --bg: #02020a;
             --card: #0d0d1a;
-            --card-hover: #12122a;
             --accent: #00ffcc;
             --accent-glow: rgba(0, 255, 204, 0.2);
-            --accent-dim: rgba(0, 255, 204, 0.08);
             --red: #ff3b5c;
             --red-glow: rgba(255, 59, 92, 0.2);
             --text: #f4f4ff;
@@ -21,128 +18,61 @@
             --border: #1a1a30;
             --radius: 20px;
             --radius-sm: 14px;
-            --transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-            -webkit-user-select: none;
-            user-select: none;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         body {
-            font-family: 'SF Pro Display', -apple-system, 'Inter', 'Segoe UI', sans-serif;
+            font-family: 'SF Pro Display', -apple-system, 'Inter', sans-serif;
             background: var(--bg);
             color: var(--text);
             padding: 12px 16px 32px;
             min-height: 100vh;
             -webkit-font-smoothing: antialiased;
             background-image:
-                radial-gradient(ellipse at 50% 0%, rgba(0, 255, 204, 0.03) 0%, transparent 60%),
-                radial-gradient(ellipse at 80% 20%, rgba(255, 59, 92, 0.02) 0%, transparent 50%);
+                radial-gradient(ellipse at 50% 0%, rgba(0,255,204,0.03) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 20%, rgba(255,59,92,0.02) 0%, transparent 50%);
         }
 
-        /* ========== HEADER ========== */
         .header {
             display: flex;
             align-items: center;
             justify-content: space-between;
             margin-bottom: 20px;
-            padding: 4px 0;
         }
-
-        .logo-wrap {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
+        .logo-wrap { display: flex; align-items: center; gap: 12px; }
         .logo-icon {
-            width: 44px;
-            height: 44px;
-            border-radius: 15px;
-            background: var(--accent-dim);
-            border: 1px solid rgba(0, 255, 204, 0.15);
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            width: 44px; height: 44px; border-radius: 15px;
+            background: rgba(0,255,204,0.08);
+            border: 1px solid rgba(0,255,204,0.15);
+            display: flex; align-items: center; justify-content: center;
             font-size: 22px;
-            position: relative;
             animation: logoGlow 3s ease-in-out infinite;
         }
-
         @keyframes logoGlow {
-            0%,
-            100% {
-                box-shadow: 0 0 0 0 var(--accent-glow);
-            }
-            50% {
-                box-shadow: 0 0 20px 4px var(--accent-glow);
-            }
+            0%,100% { box-shadow: 0 0 0 0 var(--accent-glow); }
+            50% { box-shadow: 0 0 20px 4px var(--accent-glow); }
         }
+        .logo-text h2 { font-size: 18px; font-weight: 700; letter-spacing: -0.3px; }
+        .logo-text span { font-size: 11px; color: var(--muted); }
 
-        .logo-text h2 {
-            font-size: 18px;
-            font-weight: 700;
-            letter-spacing: -0.3px;
-            line-height: 1.1;
-        }
-        .logo-text span {
-            font-size: 11px;
-            color: var(--muted);
-            font-weight: 500;
-            letter-spacing: 0.5px;
-        }
-
-        /* status pill */
         .status-pill {
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 700;
-            letter-spacing: 0.4px;
+            padding: 8px 16px; border-radius: 20px;
+            font-size: 12px; font-weight: 700;
             border: 1.5px solid var(--border);
             background: var(--card);
-            transition: all var(--transition);
-            display: flex;
-            align-items: center;
-            gap: 6px;
+            display: flex; align-items: center; gap: 6px;
         }
         .status-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: var(--accent);
-            box-shadow: 0 0 8px var(--accent-glow);
-            animation: pulse 2s infinite;
-        }
-        .status-dot.idle {
+            width: 8px; height: 8px; border-radius: 50%;
             background: var(--muted);
-            box-shadow: none;
-            animation: none;
         }
-        .status-dot.hot {
-            background: var(--red);
-            box-shadow: 0 0 12px var(--red-glow);
-            animation: pulse 0.8s infinite;
-        }
-
+        .status-dot.live { background: var(--accent); box-shadow: 0 0 8px var(--accent-glow); animation: pulse 2s infinite; }
+        .status-dot.hot { background: var(--red); box-shadow: 0 0 12px var(--red-glow); animation: pulse 0.8s infinite; }
         @keyframes pulse {
-            0%,
-            100% {
-                opacity: 1;
-                transform: scale(1);
-            }
-            50% {
-                opacity: 0.6;
-                transform: scale(1.3);
-            }
+            0%,100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.3); }
         }
 
-        /* ========== HERO CARD ========== */
         .hero-card {
             background: var(--card);
             border: 1px solid var(--border);
@@ -152,606 +82,192 @@
             text-align: center;
             position: relative;
             overflow: hidden;
-            transition: all var(--transition);
         }
-        .hero-card::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border-radius: var(--radius);
-            opacity: 0;
-            transition: opacity var(--transition);
-            background: radial-gradient(circle at 50% 30%, var(--accent-dim) 0%, transparent 70%);
-            pointer-events: none;
-        }
-        .hero-card.flash::after {
-            opacity: 1;
-        }
-
         .hero-label {
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--muted);
-            margin-bottom: 8px;
+            font-size: 11px; text-transform: uppercase;
+            letter-spacing: 2px; color: var(--muted); margin-bottom: 8px;
         }
         .hero-value {
-            font-size: 64px;
-            font-weight: 850;
-            letter-spacing: -3px;
-            line-height: 1;
+            font-size: 64px; font-weight: 850;
+            letter-spacing: -3px; line-height: 1;
             transition: color 0.3s;
-            position: relative;
-            z-index: 1;
         }
-        .hero-value.green {
-            color: var(--accent);
-            text-shadow: 0 0 40px var(--accent-glow);
-        }
-        .hero-value.red {
-            color: var(--red);
-            text-shadow: 0 0 40px var(--red-glow);
-        }
-        .hero-pair {
-            font-size: 13px;
-            color: var(--muted);
-            margin-top: 6px;
-            font-weight: 500;
-        }
+        .hero-value.green { color: var(--accent); text-shadow: 0 0 40px var(--accent-glow); }
+        .hero-value.red { color: var(--red); text-shadow: 0 0 40px var(--red-glow); }
+        .hero-pair { font-size: 13px; color: var(--muted); margin-top: 6px; }
 
-        /* ========== GRID ========== */
-        .grid-2 {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin-bottom: 14px;
-        }
-
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px; }
         .info-tile {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-sm);
-            padding: 16px;
-            transition: all var(--transition);
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
+            background: var(--card); border: 1px solid var(--border);
+            border-radius: var(--radius-sm); padding: 16px;
+            transition: 0.15s; cursor: pointer;
         }
-        .info-tile:active {
-            background: var(--card-hover);
-            border-color: rgba(0, 255, 204, 0.25);
-            transform: scale(0.96);
-        }
-        .info-tile .tile-icon {
-            font-size: 20px;
-            margin-bottom: 6px;
-        }
-        .info-tile .tile-label {
-            font-size: 10px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--muted);
-            margin-bottom: 4px;
-        }
-        .info-tile .tile-value {
-            font-size: 17px;
-            font-weight: 700;
-            letter-spacing: -0.3px;
-        }
-        .info-tile .tile-value.up {
-            color: var(--accent);
-        }
-        .info-tile .tile-value.down {
-            color: var(--red);
-        }
+        .info-tile:active { background: #12122a; transform: scale(0.96); }
+        .info-tile .tile-icon { font-size: 20px; margin-bottom: 6px; }
+        .info-tile .tile-label { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 4px; }
+        .info-tile .tile-value { font-size: 17px; font-weight: 700; }
+        .tile-value.up { color: var(--accent); }
+        .tile-value.down { color: var(--red); }
 
-        /* ========== PROGRESS ========== */
         .section-block {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-sm);
-            padding: 18px 16px;
-            margin-bottom: 14px;
+            background: var(--card); border: 1px solid var(--border);
+            border-radius: var(--radius-sm); padding: 18px 16px; margin-bottom: 14px;
         }
-        .section-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-            font-size: 13px;
-        }
-        .section-row .muted {
-            color: var(--muted);
-            font-weight: 500;
-        }
-        .section-row .bold {
-            font-weight: 700;
-        }
-
-        .progress-track {
-            height: 8px;
-            background: var(--border);
-            border-radius: 8px;
-            overflow: hidden;
-        }
+        .section-row { display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 10px; }
+        .section-row .muted { color: var(--muted); }
+        .progress-track { height: 8px; background: var(--border); border-radius: 8px; overflow: hidden; }
         .progress-fill {
-            height: 100%;
-            border-radius: 8px;
+            height: 100%; border-radius: 8px;
             background: linear-gradient(90deg, var(--accent), #00ccaa);
-            transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: width 0.6s;
             box-shadow: 0 0 12px var(--accent-glow);
         }
 
-        /* particles inside progress */
-        .progress-fill::after {
-            content: '';
-            display: block;
-            width: 40px;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            animation: shimmer 2s infinite;
-        }
-
-        @keyframes shimmer {
-            0% {
-                transform: translateX(-60px);
-            }
-            100% {
-                transform: translateX(400px);
-            }
-        }
-
-        /* ========== BUTTONS ========== */
         .btn {
-            width: 100%;
-            padding: 17px;
-            border: none;
-            border-radius: var(--radius-sm);
-            font-size: 15px;
-            font-weight: 700;
-            letter-spacing: -0.2px;
-            cursor: pointer;
-            transition: all var(--transition);
-            margin-bottom: 10px;
-            position: relative;
-            overflow: hidden;
+            width: 100%; padding: 17px; border: none;
+            border-radius: var(--radius-sm); font-size: 15px;
+            font-weight: 700; cursor: pointer; margin-bottom: 10px;
+            transition: 0.15s;
         }
-        .btn:active {
-            transform: scale(0.96);
-        }
+        .btn:active { transform: scale(0.96); }
+        .btn-glass { background: var(--card); border: 1.5px solid var(--border); color: var(--text); }
+        .btn-premium { background: linear-gradient(135deg, #f59e0b, #ef4444); color: #fff; }
 
-        .btn-glass {
-            background: var(--card);
-            border: 1.5px solid var(--border);
-            color: var(--text);
-            backdrop-filter: blur(10px);
+        .hint {
+            text-align: center; font-size: 11px; color: var(--muted);
+            margin-top: 4px; line-height: 1.6;
         }
-        .btn-glass:hover {
-            border-color: var(--accent);
-        }
-
-        .btn-accent {
-            background: var(--accent);
-            color: #000;
-            font-weight: 800;
-            box-shadow: 0 8px 30px rgba(0, 255, 204, 0.25);
-        }
-        .btn-accent:active {
-            box-shadow: 0 4px 15px rgba(0, 255, 204, 0.4);
-        }
-
-        .btn-premium {
-            background: linear-gradient(135deg, #f59e0b, #ef4444);
-            color: #fff;
-            font-weight: 800;
-            box-shadow: 0 8px 30px rgba(245, 158, 11, 0.2);
-        }
-
-        .btn-icon {
-            margin-right: 6px;
-        }
-
-        /* ========== TOAST ========== */
-        .toast {
-            position: fixed;
-            bottom: 100px;
-            left: 50%;
-            transform: translateX(-50%) translateY(20px);
-            background: var(--card);
-            border: 1px solid var(--accent);
-            color: var(--accent);
-            padding: 12px 24px;
-            border-radius: 30px;
-            font-size: 13px;
-            font-weight: 700;
-            opacity: 0;
-            transition: all 0.3s;
-            pointer-events: none;
-            z-index: 100;
-            box-shadow: 0 8px 30px var(--accent-glow);
-        }
-        .toast.show {
-            opacity: 1;
-            transform: translateX(-50%) translateY(0);
-        }
-
-        /* ========== RIPPLES ========== */
-        .ripple {
-            position: absolute;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.2);
-            transform: scale(0);
-            animation: ripple 0.6s linear;
-            pointer-events: none;
-        }
-        @keyframes ripple {
-            to {
-                transform: scale(4);
-                opacity: 0;
-            }
-        }
+        .hint span { color: var(--accent); }
     </style>
 </head>
 <body>
 
-    <!-- HEADER -->
     <div class="header">
         <div class="logo-wrap">
             <div class="logo-icon">🔮</div>
             <div class="logo-text">
                 <h2>Crypto Spy</h2>
-                <span>P2P Arbitrage Engine</span>
+                <span>P2P Arbitrage</span>
             </div>
         </div>
-        <div class="status-pill" id="statusPill">
+        <div class="status-pill">
             <span class="status-dot" id="statusDot"></span>
-            <span id="statusLabel">Сканирую</span>
+            <span id="statusLabel">Загрузка</span>
         </div>
     </div>
 
-    <!-- HERO -->
-    <div class="hero-card" id="heroCard">
-        <div class="hero-label">Спред</div>
+    <div class="hero-card">
+        <div class="hero-label">Текущий спред</div>
         <div class="hero-value" id="spreadValue">—</div>
         <div class="hero-pair">USDT → RUB</div>
     </div>
 
-    <!-- GRID -->
     <div class="grid-2">
-        <div class="info-tile" id="tileBuy">
+        <div class="info-tile">
             <div class="tile-icon">📥</div>
             <div class="tile-label">Покупка</div>
             <div class="tile-value" id="buyValue">—</div>
         </div>
-        <div class="info-tile" id="tileSell">
+        <div class="info-tile">
             <div class="tile-icon">📤</div>
             <div class="tile-label">Продажа</div>
             <div class="tile-value" id="sellValue">—</div>
         </div>
-        <div class="info-tile" id="tileProfit">
+        <div class="info-tile">
             <div class="tile-icon">💰</div>
             <div class="tile-label">Прибыль</div>
             <div class="tile-value" id="profitValue">—</div>
         </div>
-        <div class="info-tile" id="tileVolume">
+        <div class="info-tile">
             <div class="tile-icon">📊</div>
             <div class="tile-label">Объём</div>
-            <div class="tile-value" id="volumeValue">1000 USDT</div>
+            <div class="tile-value">1000 USDT</div>
         </div>
     </div>
 
-    <!-- PROGRESS -->
     <div class="section-block">
         <div class="section-row">
             <span class="muted">🎯 Дневная цель</span>
-            <span class="bold" id="goalText">0 / 5 связок</span>
+            <span id="goalText">0 / 5 связок</span>
         </div>
         <div class="progress-track">
             <div class="progress-fill" id="progressFill" style="width: 0%;"></div>
         </div>
     </div>
 
-    <!-- BUTTONS -->
-    <button class="btn btn-accent" id="btnRefresh">
-        <span class="btn-icon">🔄</span> Обновить
+    <button class="btn btn-glass" onclick="window.Telegram.WebApp.close()">
+        ✕ Закрыть
     </button>
-    <button class="btn btn-glass" id="btnNotify">
-        <span class="btn-icon">🔔</span> Уведомления
-    </button>
-    <button class="btn btn-premium" id="btnPremium">
-        <span class="btn-icon">💎</span> Premium · 499 ₽/мес
+    <button class="btn btn-premium" onclick="window.Telegram.WebApp.close()">
+        💎 Premium · 499 ₽/мес
     </button>
 
-    <!-- TOAST -->
-    <div class="toast" id="toast"></div>
+    <p class="hint">
+        Чтобы обновить данные —<br>
+        закрой Mini App и нажми <span>/start</span> в боте
+    </p>
 
     <script>
         (function() {
             const tg = window.Telegram.WebApp;
             tg.expand();
             tg.ready();
-            tg.enableClosingConfirmation();
 
-            // ============ DOM REFS ============
-            const $ = (sel) => document.querySelector(sel);
-            const spreadValue = $('#spreadValue');
-            const heroCard = $('#heroCard');
-            const buyValue = $('#buyValue');
-            const sellValue = $('#sellValue');
-            const profitValue = $('#profitValue');
-            const volumeValue = $('#volumeValue');
-            const progressFill = $('#progressFill');
-            const goalText = $('#goalText');
-            const statusDot = $('#statusDot');
-            const statusLabel = $('#statusLabel');
-            const statusPill = $('#statusPill');
-            const toast = $('#toast');
-            const btnNotify = $('#btnNotify');
+            const $ = (s) => document.querySelector(s);
 
-            let notifyOn = true;
-            let dailyGoal = 0;
+            // Читаем данные из URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const raw = urlParams.get('startapp');
 
-            // ============ DATA LOADING ============
-            function parseStartParam() {
-                const urlParams = new URLSearchParams(window.location.search);
-                const raw = urlParams.get('startapp');
-                if (!raw) return null;
+            if (raw) {
                 try {
-                    return JSON.parse(decodeURIComponent(raw));
-                } catch (e) {
-                    return null;
-                }
-            }
+                    const data = JSON.parse(decodeURIComponent(raw));
+                    const spread = data.spread_pct;
+                    const isPositive = spread > 0;
+                    const isHot = spread > 0.5;
 
-            function updateUI(data) {
-                const spread = data.spread_pct;
-                const isPositive = spread > 0;
-                const isHot = spread > 0.5;
+                    // Hero
+                    const sv = $('#spreadValue');
+                    sv.textContent = spread.toFixed(2) + '%';
+                    sv.className = 'hero-value ' + (isPositive ? 'green' : 'red');
 
-                // Hero
-                spreadValue.textContent = spread.toFixed(2) + '%';
-                spreadValue.className = 'hero-value ' + (isPositive ? 'green' : 'red');
+                    // Grid
+                    $('#buyValue').textContent = data.buy_rate + ' ₽';
+                    $('#sellValue').textContent = data.sell_rate + ' ₽';
+                    const profit = data.profit_1000;
+                    const pv = $('#profitValue');
+                    pv.textContent = (profit >= 0 ? '+' : '') + profit.toFixed(0) + ' ₽';
+                    pv.className = 'tile-value ' + (profit >= 0 ? 'up' : 'down');
 
-                // Flash animation
-                heroCard.classList.add('flash');
-                setTimeout(() => heroCard.classList.remove('flash'), 600);
-
-                // Grid
-                buyValue.textContent = data.buy_rate + ' ₽';
-                sellValue.textContent = data.sell_rate + ' ₽';
-                const profit = data.profit_1000;
-                profitValue.textContent = (profit >= 0 ? '+' : '') + profit.toFixed(0) + ' ₽';
-                profitValue.className = 'tile-value ' + (profit >= 0 ? 'up' : 'down');
-                volumeValue.textContent = '1000 USDT';
-
-                // Progress (simulate)
-                dailyGoal = Math.min(dailyGoal + (isHot ? 1 : 0), 5);
-                if (isHot && dailyGoal < 5) dailyGoal++;
-                goalText.textContent = dailyGoal + ' / 5 связок';
-                progressFill.style.width = (dailyGoal / 5 * 100) + '%';
-
-                // Status pill
-                if (isHot) {
-                    statusDot.className = 'status-dot hot';
-                    statusLabel.textContent = '🔥 Связка!';
-                    statusPill.style.borderColor = 'rgba(255,59,92,0.4)';
-                } else if (isPositive) {
-                    statusDot.className = 'status-dot';
-                    statusLabel.textContent = '🟢 Выгодно';
-                    statusPill.style.borderColor = 'rgba(0,255,204,0.3)';
-                } else {
-                    statusDot.className = 'status-dot idle';
-                    statusLabel.textContent = '⏳ Ждём';
-                    statusPill.style.borderColor = 'var(--border)';
-                }
-
-                showToast(isHot ? '🔥 Найдена жирная связка!' : '✅ Данные обновлены');
-            }
-
-            function showEmpty() {
-                spreadValue.textContent = '—';
-                spreadValue.className = 'hero-value';
-                buyValue.textContent = '—';
-                sellValue.textContent = '—';
-                profitValue.textContent = '—';
-                profitValue.className = 'tile-value';
-                statusDot.className = 'status-dot idle';
-                statusLabel.textContent = 'Нет данных';
-                showToast('Нажми /start в боте для загрузки');
-            }
-
-            // ============ ACTIONS ============
-            function refresh() {
-                rippleEffect($('#btnRefresh'));
-                tg.sendData(JSON.stringify({ action: 'get_spread' }));
-            }
-
-            function toggleNotify() {
-                rippleEffect(btnNotify);
-                notifyOn = !notifyOn;
-                if (notifyOn) {
-                    btnNotify.innerHTML = '<span class="btn-icon">🔔</span> Уведомления';
-                    tg.sendData(JSON.stringify({ action: 'notify_on' }));
-                    showToast('🔔 Уведомления включены');
-                } else {
-                    btnNotify.innerHTML = '<span class="btn-icon">🔕</span> Уведомления';
-                    tg.sendData(JSON.stringify({ action: 'notify_off' }));
-                    showToast('🔕 Уведомления отключены');
-                }
-            }
-
-            function buyPremium() {
-                rippleEffect($('#btnPremium'));
-                tg.sendData(JSON.stringify({ action: 'buy_premium' }));
-                showToast('💎 Запрос на Premium отправлен');
-            }
-
-            // ============ TOAST ============
-            let toastTimer;
-
-            function showToast(msg) {
-                toast.textContent = msg;
-                toast.classList.add('show');
-                clearTimeout(toastTimer);
-                toastTimer = setTimeout(() => toast.classList.remove('show'), 2000);
-            }
-
-            // ============ RIPPLE EFFECT ============
-            function rippleEffect(el) {
-                const ripple = document.createElement('span');
-                ripple.className = 'ripple';
-                const size = Math.max(el.offsetWidth, el.offsetHeight);
-                ripple.style.width = ripple.style.height = size + 'px';
-                ripple.style.left = '50%';
-                ripple.style.top = '50%';
-                ripple.style.marginLeft = -size / 2 + 'px';
-                ripple.style.marginTop = -size / 2 + 'px';
-                el.style.position = 'relative';
-                el.style.overflow = 'hidden';
-                el.appendChild(ripple);
-                setTimeout(() => ripple.remove(), 600);
-            }
-
-            // ============ EVENT BINDINGS ============
-            $('#btnRefresh').addEventListener('click', refresh);
-            btnNotify.addEventListener('click', toggleNotify);
-            $('#btnPremium').addEventListener('click', buyPremium);
-
-            // Tile clicks copy value
-            document.querySelectorAll('.info-tile').forEach(tile => {
-                tile.addEventListener('click', () => {
-                    rippleEffect(tile);
-                    const val = tile.querySelector('.tile-value').textContent;
-                    if (val && val !== '—') {
-                        navigator.clipboard?.writeText(val);
-                        showToast('📋 Скопировано: ' + val);
+                    // Status
+                    const dot = $('#statusDot');
+                    const label = $('#statusLabel');
+                    if (isHot) {
+                        dot.className = 'status-dot hot';
+                        label.textContent = '🔥 Связка!';
+                    } else if (isPositive) {
+                        dot.className = 'status-dot live';
+                        label.textContent = '🟢 Выгодно';
+                    } else {
+                        dot.className = 'status-dot';
+                        label.textContent = '⏳ Ждём';
                     }
-                });
-            });
 
-            // Pull-to-refresh simulation (swipe down on hero)
-            let touchStartY = 0;
-            heroCard.addEventListener('touchstart', e => { touchStartY = e.touches[0].clientY; });
-            heroCard.addEventListener('touchend', e => {
-                if (e.changedTouches[0].clientY - touchStartY > 80) {
-                    refresh();
+                    // Progress
+                    const goal = Math.min(Math.floor(Math.abs(spread) * 3), 5);
+                    $('#goalText').textContent = goal + ' / 5 связок';
+                    $('#progressFill').style.width = (goal / 5 * 100) + '%';
+
+                } catch(e) {
+                    $('#spreadValue').textContent = 'Ошибка';
                 }
-            });
-
-            // ============ INIT ============
-            const initialData = parseStartParam();
-            if (initialData) {
-                updateUI(initialData);
             } else {
-                showEmpty();
+                $('#statusLabel').textContent = 'Нет данных';
+                $('#spreadValue').textContent = '—';
             }
 
-            // Log
-            console.log('%c🔮 Crypto Spy %cMini App v2',
-                'color:#00ffcc;font-size:16px;', 'color:#888;');
-            console.log('%cP2P Arbitrage Engine %cReady',
-                'color:#fff;', 'color:#00ffcc;');
+            console.log('%c🔮 Crypto Spy %cReady', 'color:#00ffcc;font-size:16px;', 'color:#888;');
         })();
     </script>
 </body>
 </html>
-=======
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crypto Spy</title>
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: -apple-system, sans-serif;
-            background: #0f172a;
-            color: #e2e8f0;
-            padding: 20px;
-            text-align: center;
-        }
-        h1 { color: #38bdf8; font-size: 22px; margin-bottom: 8px; }
-        p { color: #94a3b8; font-size: 14px; margin-bottom: 20px; }
-        
-        .card {
-            background: #1e293b;
-            border-radius: 12px;
-            padding: 20px;
-            margin: 12px 0;
-        }
-        .price { font-size: 28px; font-weight: 700; margin: 10px 0; }
-        .green { color: #4ade80; }
-        .red { color: #f87171; }
-        .label { color: #94a3b8; font-size: 13px; }
-        
-        button {
-            width: 100%;
-            padding: 16px;
-            border: none;
-            border-radius: 12px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            margin: 6px 0;
-            background: #38bdf8;
-            color: #0f172a;
-        }
-        button.outline {
-            background: transparent;
-            border: 2px solid #38bdf8;
-            color: #38bdf8;
-        }
-        button.premium {
-            background: linear-gradient(135deg, #f59e0b, #ef4444);
-            color: white;
-        }
-    </style>
-</head>
-<body>
-    <h1>🔍 Crypto Spy</h1>
-    <p>Мониторинг P2P-связок USDT/RUB</p>
-
-    <div class="card">
-        <div class="label">Текущий спред</div>
-        <div class="price" id="spread">—</div>
-        <div class="label">📥 Покупка: <span id="buy">—</span></div>
-        <div class="label">📤 Продажа: <span id="sell">—</span></div>
-        <div class="label">💰 С 1000 USDT: <span id="profit">—</span></div>
-    </div>
-
-    <button onclick="refresh()">🔄 Обновить</button>
-    <button class="outline" id="btnNotify" onclick="toggleNotify()">🔕 Уведомления</button>
-    <button class="premium" onclick="buyPremium()">💎 Premium — 499₽/мес</button>
-
-    <script>
-        const tg = window.Telegram.WebApp;
-        tg.expand();
-
-        function refresh() {
-            document.getElementById('spread').textContent = 'Загрузка...';
-            tg.sendData(JSON.stringify({action: 'get_spread'}));
-        }
-
-        function toggleNotify() {
-            const btn = document.getElementById('btnNotify');
-            if (btn.textContent.includes('🔕')) {
-                btn.textContent = '🔔 Включить уведомления';
-                tg.sendData(JSON.stringify({action: 'notify_off'}));
-            } else {
-                btn.textContent = '🔕 Отключить уведомления';
-                tg.sendData(JSON.stringify({action: 'notify_on'}));
-            }
-        }
-
-        function buyPremium() {
-            tg.sendData(JSON.stringify({action: 'buy_premium'}));
-        }
-
-        // Обновление при открытии
-        refresh();
-    </script>
-</body>
-</html>
->>>>>>> 8ab321b8755bd131b2be5e241ae244338799585b
