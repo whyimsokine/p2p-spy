@@ -6,177 +6,91 @@
     <title>Crypto Spy</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
-        :root {
-            --bg: #030308; --card: #0b0b16; --accent: #00e6b8; --accent2: #00c4ff;
-            --red: #ff3366; --gold: #f0c050; --text: #ededf5; --muted: #6b6b85; --border: #1c1c30;
-        }
-        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        body {
-            font-family: 'Inter', -apple-system, sans-serif;
-            background: var(--bg); color: var(--text);
-            padding: 20px 16px; min-height: 100vh;
-            background-image: radial-gradient(ellipse at 30% 0%, rgba(0,230,184,0.04) 0%, transparent 50%);
-        }
-        .header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; }
-        .brand { display: flex; align-items: center; gap: 10px; }
-        .brand-mark {
-            width: 40px; height: 40px; border-radius: 12px;
-            background: linear-gradient(135deg, var(--accent), var(--accent2));
-            display: flex; align-items: center; justify-content: center;
-            font-size: 18px; font-weight: 800; color: #000;
-        }
-        .brand-name { font-size: 18px; font-weight: 700; }
-        .brand-sub { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; }
-
-        .status {
-            display: flex; align-items: center; gap: 6px;
-            padding: 6px 12px; border-radius: 20px;
-            background: var(--card); border: 1px solid var(--border);
-            font-size: 10px; font-weight: 600; color: var(--muted);
-        }
-        .status-dot { width: 6px; height: 6px; border-radius: 50%; }
-        .status-dot.good { background: var(--accent); box-shadow: 0 0 6px var(--accent); }
-        .status-dot.bad { background: var(--red); box-shadow: 0 0 6px var(--red); }
-        .status-dot.idle { background: var(--muted); }
-
-        .hero {
-            background: var(--card); border: 1px solid var(--border);
-            border-radius: 24px; padding: 32px 20px; text-align: center;
-            margin-bottom: 14px; position: relative; overflow: hidden;
-        }
-        .hero::before {
-            content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
-            width: 180px; height: 1px;
-            background: linear-gradient(90deg, transparent, var(--accent), transparent);
-            opacity: 0.6;
-        }
-        .hero-label { font-size: 10px; text-transform: uppercase; letter-spacing: 2.5px; color: var(--muted); margin-bottom: 10px; }
-        .hero-value { font-size: 64px; font-weight: 850; letter-spacing: -3px; line-height: 1; }
-        .hero-value.up { color: var(--accent); text-shadow: 0 0 50px rgba(0,230,184,0.35); }
-        .hero-value.down { color: var(--red); text-shadow: 0 0 50px rgba(255,51,102,0.35); }
-        .hero-sub { font-size: 11px; color: var(--muted); margin-top: 8px; }
-
-        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px; }
-        .tile {
-            background: var(--card); border: 1px solid var(--border);
-            border-radius: 16px; padding: 16px;
-        }
-        .tile-top { display: flex; align-items: center; gap: 6px; margin-bottom: 8px; }
-        .tile-badge {
-            width: 24px; height: 24px; border-radius: 7px;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 10px; font-weight: 700;
-        }
-        .tile-badge.buy { background: rgba(0,230,184,0.12); color: var(--accent); }
-        .tile-badge.sell { background: rgba(255,51,102,0.12); color: var(--red); }
-        .tile-badge.profit { background: rgba(240,192,80,0.12); color: var(--gold); }
-        .tile-badge.vol { background: rgba(0,196,255,0.12); color: var(--accent2); }
-        .tile-label { font-size: 9px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); }
-        .tile-value { font-size: 16px; font-weight: 700; }
-
-        .footnote {
-            text-align: center; margin-top: 16px;
-            font-size: 11px; color: var(--muted); line-height: 1.6;
-        }
-        .footnote span { color: var(--accent); }
+        :root{--bg:#030308;--card:#0b0b16;--accent:#00e6b8;--red:#ff3366;--gold:#f0c050;--text:#ededf5;--muted:#6b6b85;--border:#1c1c30}
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:-apple-system,sans-serif;background:var(--bg);color:var(--text);padding:20px 16px;min-height:100vh}
+        .header{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px}
+        .brand{display:flex;align-items:center;gap:10px}
+        .brand-mark{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,var(--accent),#00c4ff);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;color:#000}
+        .brand-name{font-size:18px;font-weight:700}
+        .brand-sub{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
+        .status{display:flex;align-items:center;gap:6px;padding:6px 12px;border-radius:20px;background:var(--card);border:1px solid var(--border);font-size:10px;font-weight:600;color:var(--muted)}
+        .dot{width:6px;height:6px;border-radius:50%}
+        .dot.green{background:var(--accent)}
+        .dot.red{background:var(--red)}
+        .hero{background:var(--card);border:1px solid var(--border);border-radius:24px;padding:32px 20px;text-align:center;margin-bottom:14px}
+        .hero-label{font-size:10px;text-transform:uppercase;letter-spacing:2px;color:var(--muted);margin-bottom:10px}
+        .hero-value{font-size:64px;font-weight:850;letter-spacing:-3px}
+        .hero-value.up{color:var(--accent)}
+        .hero-value.down{color:var(--red)}
+        .hero-sub{font-size:11px;color:var(--muted);margin-top:8px}
+        .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+        .tile{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px}
+        .tile-label{font-size:9px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:4px}
+        .tile-value{font-size:16px;font-weight:700}
+        .tile-value.green{color:var(--accent)}
+        .tile-value.red{color:var(--red)}
+        .tile-value.gold{color:var(--gold)}
+        .footnote{text-align:center;margin-top:16px;font-size:11px;color:var(--muted)}
+        .debug{background:#111;color:#0f0;font-size:10px;padding:8px;border-radius:8px;margin-top:8px;word-break:break-all}
     </style>
 </head>
 <body>
-
     <div class="header">
         <div class="brand">
             <div class="brand-mark">CS</div>
-            <div>
-                <div class="brand-name">Crypto Spy</div>
-                <div class="brand-sub">Arbitrage Engine</div>
-            </div>
+            <div><div class="brand-name">Crypto Spy</div><div class="brand-sub">Arbitrage Engine</div></div>
         </div>
-        <div class="status">
-            <div class="status-dot" id="statusDot"></div>
-            <span id="statusLabel">—</span>
-        </div>
+        <div class="status"><div class="dot" id="dot"></div><span id="statusText">-</span></div>
     </div>
-
     <div class="hero">
         <div class="hero-label">Spread</div>
-        <div class="hero-value" id="heroValue">—</div>
-        <div class="hero-sub">USDT &rarr; RUB</div>
+        <div class="hero-value" id="spread">-</div>
+        <div class="hero-sub">USDT → RUB</div>
     </div>
-
     <div class="grid">
-        <div class="tile">
-            <div class="tile-top">
-                <div class="tile-badge buy">B</div>
-                <div class="tile-label">Buy</div>
-            </div>
-            <div class="tile-value" id="buyVal">—</div>
-        </div>
-        <div class="tile">
-            <div class="tile-top">
-                <div class="tile-badge sell">S</div>
-                <div class="tile-label">Sell</div>
-            </div>
-            <div class="tile-value" id="sellVal">—</div>
-        </div>
-        <div class="tile">
-            <div class="tile-top">
-                <div class="tile-badge profit">P</div>
-                <div class="tile-label">Profit</div>
-            </div>
-            <div class="tile-value" id="profitVal">—</div>
-        </div>
-        <div class="tile">
-            <div class="tile-top">
-                <div class="tile-badge vol">V</div>
-                <div class="tile-label">Volume</div>
-            </div>
-            <div class="tile-value">1 000 USDT</div>
-        </div>
+        <div class="tile"><div class="tile-label">Buy</div><div class="tile-value green" id="buy">-</div></div>
+        <div class="tile"><div class="tile-label">Sell</div><div class="tile-value red" id="sell">-</div></div>
+        <div class="tile"><div class="tile-label">Profit</div><div class="tile-value gold" id="profit">-</div></div>
+        <div class="tile"><div class="tile-label">Volume</div><div class="tile-value">1000 USDT</div></div>
     </div>
-
-    <p class="footnote">
-        Для обновления данных<br>
-        нажмите <span>/start</span> в боте и откройте снова
-    </p>
+    <p class="footnote">/start in bot to refresh</p>
+    <div class="debug" id="debug"></div>
 
     <script>
-        const $ = (s) => document.querySelector(s);
+        const $ = s => document.querySelector(s);
         window.Telegram.WebApp.expand();
         window.Telegram.WebApp.ready();
 
         const raw = new URLSearchParams(window.location.search).get('startapp');
-        if (!raw) {
-            $('#statusLabel').textContent = 'no data';
-            return;
-        }
+        $('#debug').textContent = 'RAW: ' + (raw || 'NULL');
 
-        try {
-            const d = JSON.parse(decodeURIComponent(raw));
-            const spread = d.spread_pct;
-            const isPos = spread > 0;
-            const isHot = spread > 0.5;
+        if (!raw) { $('#statusText').textContent = 'no data'; return; }
 
-            const hv = $('#heroValue');
-            hv.textContent = (isPos ? '+' : '') + spread.toFixed(2) + '%';
-            hv.className = 'hero-value ' + (isPos ? 'up' : 'down');
+        const parts = decodeURIComponent(raw).split('|');
+        if (parts.length < 4) { $('#statusText').textContent = 'bad format'; return; }
 
-            $('#buyVal').textContent = d.buy_rate + ' ₽';
-            $('#sellVal').textContent = d.sell_rate + ' ₽';
-            const profit = d.profit_1000;
-            const pv = $('#profitVal');
-            pv.textContent = (profit >= 0 ? '+' : '') + profit.toFixed(0) + ' ₽';
-            pv.style.color = profit >= 0 ? 'var(--accent)' : 'var(--red)';
+        const spread = parseFloat(parts[0]);
+        const isPos = spread > 0;
+        const isHot = spread > 0.5;
 
-            const sd = $('#statusDot');
-            const sl = $('#statusLabel');
-            if (isHot) { sd.className = 'status-dot bad'; sl.textContent = 'hot'; }
-            else if (isPos) { sd.className = 'status-dot good'; sl.textContent = 'live'; }
-            else { sd.className = 'status-dot idle'; sl.textContent = 'idle'; }
+        const sv = $('#spread');
+        sv.textContent = (isPos ? '+' : '') + spread.toFixed(2) + '%';
+        sv.className = 'hero-value ' + (isPos ? 'up' : 'down');
 
-        } catch(e) {
-            $('#heroValue').textContent = '—';
-            $('#statusLabel').textContent = 'error';
-        }
+        $('#buy').textContent = parseFloat(parts[1]).toFixed(2) + ' ₽';
+        $('#sell').textContent = parseFloat(parts[2]).toFixed(2) + ' ₽';
+
+        const profit = parseFloat(parts[3]);
+        const pv = $('#profit');
+        pv.textContent = (profit >= 0 ? '+' : '') + profit.toFixed(0) + ' ₽';
+        pv.className = 'tile-value ' + (profit >= 0 ? 'green' : 'red');
+
+        const dot = $('#dot');
+        const st = $('#statusText');
+        if (isHot) { dot.className = 'dot red'; st.textContent = 'hot'; }
+        else if (isPos) { dot.className = 'dot green'; st.textContent = 'live'; }
+        else { dot.className = 'dot'; st.textContent = 'idle'; }
     </script>
 </body>
 </html>
