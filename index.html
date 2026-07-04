@@ -55,42 +55,69 @@
         <div class="tile"><div class="tile-label">Volume</div><div class="tile-value">1000 USDT</div></div>
     </div>
     <p class="footnote">/start in bot to refresh</p>
-    <div class="debug" id="debug"></div>
+    <div class="debug" id="debug">...</div>
 
     <script>
-        const $ = s => document.querySelector(s);
+        var spreadEl = document.getElementById('spread');
+        var buyEl = document.getElementById('buy');
+        var sellEl = document.getElementById('sell');
+        var profitEl = document.getElementById('profit');
+        var dotEl = document.getElementById('dot');
+        var statusEl = document.getElementById('statusText');
+        var debugEl = document.getElementById('debug');
+
         window.Telegram.WebApp.expand();
         window.Telegram.WebApp.ready();
 
-        const raw = new URLSearchParams(window.location.search).get('startapp');
-        $('#debug').textContent = 'RAW: ' + (raw || 'NULL');
+        var url = window.location.search;
+        debugEl.textContent = 'URL: ' + url.substring(0, 50);
 
-        if (!raw) { $('#statusText').textContent = 'no data'; return; }
+        var raw = null;
+        if (url.indexOf('startapp=') !== -1) {
+            raw = url.split('startapp=')[1];
+            if (raw.indexOf('&') !== -1) {
+                raw = raw.split('&')[0];
+            }
+            raw = decodeURIComponent(raw);
+        }
 
-        const parts = decodeURIComponent(raw).split('|');
-        if (parts.length < 4) { $('#statusText').textContent = 'bad format'; return; }
+        debugEl.textContent = debugEl.textContent + ' | RAW: ' + (raw || 'NULL');
 
-        const spread = parseFloat(parts[0]);
-        const isPos = spread > 0;
-        const isHot = spread > 0.5;
+        if (!raw) {
+            statusEl.textContent = 'no data';
+            return;
+        }
 
-        const sv = $('#spread');
-        sv.textContent = (isPos ? '+' : '') + spread.toFixed(2) + '%';
-        sv.className = 'hero-value ' + (isPos ? 'up' : 'down');
+        var parts = raw.split('|');
+        if (parts.length < 4) {
+            statusEl.textContent = 'bad format';
+            return;
+        }
 
-        $('#buy').textContent = parseFloat(parts[1]).toFixed(2) + ' ₽';
-        $('#sell').textContent = parseFloat(parts[2]).toFixed(2) + ' ₽';
+        var spread = parseFloat(parts[0]);
+        var isPos = spread > 0;
+        var isHot = spread > 0.5;
 
-        const profit = parseFloat(parts[3]);
-        const pv = $('#profit');
-        pv.textContent = (profit >= 0 ? '+' : '') + profit.toFixed(0) + ' ₽';
-        pv.className = 'tile-value ' + (profit >= 0 ? 'green' : 'red');
+        spreadEl.textContent = (isPos ? '+' : '') + spread.toFixed(2) + '%';
+        spreadEl.className = 'hero-value ' + (isPos ? 'up' : 'down');
 
-        const dot = $('#dot');
-        const st = $('#statusText');
-        if (isHot) { dot.className = 'dot red'; st.textContent = 'hot'; }
-        else if (isPos) { dot.className = 'dot green'; st.textContent = 'live'; }
-        else { dot.className = 'dot'; st.textContent = 'idle'; }
+        buyEl.textContent = parseFloat(parts[1]).toFixed(2) + ' RUB';
+        sellEl.textContent = parseFloat(parts[2]).toFixed(2) + ' RUB';
+
+        var profit = parseFloat(parts[3]);
+        profitEl.textContent = (profit >= 0 ? '+' : '') + profit.toFixed(0) + ' RUB';
+        profitEl.className = 'tile-value ' + (profit >= 0 ? 'green' : 'red');
+
+        if (isHot) {
+            dotEl.className = 'dot red';
+            statusEl.textContent = 'hot';
+        } else if (isPos) {
+            dotEl.className = 'dot green';
+            statusEl.textContent = 'live';
+        } else {
+            dotEl.className = 'dot';
+            statusEl.textContent = 'idle';
+        }
     </script>
 </body>
 </html>
